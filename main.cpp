@@ -7,14 +7,36 @@ using json = nlohmann::json;
 using namespace std;
 
 int main(){
-    ifstream archivo("prueba.json"); //lectura del archivo JSON
-    json cargarData = json::parse(archivo); // almanenar los datos en una nueva variable declarada en la liberia "json.hpp"
+    // leer datos de los libros disponibles
+    ifstream fileBooks("./data/booksData.json");
 
-    cout<<cargarData; // mostrar todos los datos del archivo JSON
+    // leer datos de los usuarios existentes
+    ifstream fileUser("./data/userData.json");
+
+    // pasar los datos a objetos(variables) para trabajar
+    json booksData = json::parse(fileBooks);
+    json userData = json::parse(fileUser);
+
+    // mostrar los datos obtenidos de los liros y usuarios
+    cout << booksData.dump(1, '\t') << "\n\n";
+    cout << userData.dump(1, '\t') << "\n\n"<< endl;
+
+    /* mostrar datos precisos de un usuario */
     
-    cout<< "\n";
-    cout << cargarData.at("Anna") << endl; // mostrar solo los datos del objeto "Anna"
-    cout << cargarData.at("Anna").at("age") << endl; // mostrar solo la edad del objeto "Anna"
+    // mostrar todos los datos del usuario it54816518
+    cout << userData.at("it54816518") << "\n" <<
+            // mostrar solo el DNI del usuario
+            userData.at("it54816518").at("dni") << "\n" <<
+            // mostrar solo los libros leidos por el usuario
+            userData.at("it54816518").at("booksRead") << endl;
+    
+    /* mostrar datos precisos de un usuario */
+    // mostrar todos los datos del libro li0001
+    cout << booksData.at("li0001") << "\n" <<
+            // mostrar solo el genero del libro
+            booksData.at("li0001").at("Genero") << "\n" <<
+            // mostrar solo el nombre del libro
+            booksData.at("li0001").at("Nombre") << endl;
 
     //system("pause");
     return 0;

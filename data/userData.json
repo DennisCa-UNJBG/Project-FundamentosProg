@@ -1,0 +1,37 @@
+{
+    "pe73609514" : {
+        "dni" : 41590637,
+        "name" : "Juan Peña",
+        "booksRead" : ["li0001" ,"li0002"],
+        "points" : 10,
+        "trophies" : [null]
+    },
+    "co7461825" : { 
+        "dni" : 52481647,
+        "name" : "Luis Corzo",
+        "booksRead" : ["li0001","li0002"],
+        "points" : 10,
+        "trophies" : [null]
+    },
+    "it54816518" : {
+        "dni" : 81561845,
+        "name" : "Rufina Iturriaga",
+        "booksRead" : ["li0002","li0003"],
+        "points" : 10,
+        "trophies" : [null]
+    },
+    "va78326054" : {
+        "dni" : 45062387,
+        "name" : "Manuel Vargas",
+        "booksRead" : ["li0003"],
+        "points" : 10,
+        "trophies" : [null]
+    },
+    "es21546958" : {
+        "dni" : 85964512,
+        "name" : "Cinthia Espejo",
+        "booksRead" : ["li0004"],
+        "points" : 10,
+        "trophies" : [null]
+    }
+}
