@@ -1,27 +1,27 @@
 {
-    "li0001" : { 
-        "Genero" : 1,
-        "Nombre" : "Ciencia Ficcion-1",
-        "NroPag" : 75
-    },
-    "li0002" : { 
-        "Genero" : 2,
-        "Nombre" : "Drama-1",
-        "NroPag" : 75
-    },
-    "li0003" : { 
-        "Genero" : 3,
-        "Nombre" : "Romantica-1",
-        "NroPag" : 75
-    },
-    "li0004" : { 
-        "Genero" : 4,
-        "Nombre" : "Cuento-1",
-        "NroPag" : 75
-    },
-    "li0005" : { 
-        "Genero" : 5,
-        "Nombre" : "Novela-1",
-        "NroPag" : 75
-    }
+	"li0001": {
+		"Genero": 1,
+		"Nombre": "Ciencia Ficcion-1",
+		"NroPag": 75
+	},
+	"li0002": {
+		"Genero": 2,
+		"Nombre": "Drama-1",
+		"NroPag": 75
+	},
+	"li0003": {
+		"Genero": 3,
+		"Nombre": "Romantica-1",
+		"NroPag": 75
+	},
+	"li0004": {
+		"Genero": 4,
+		"Nombre": "Cuento-1",
+		"NroPag": 75
+	},
+	"li0005": {
+		"Genero": 5,
+		"Nombre": "Novela-1",
+		"NroPag": 75
+	}
 }

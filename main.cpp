@@ -6,6 +6,17 @@
 using json = nlohmann::json;
 using namespace std;
 
+// categoria de los libros
+                        // 0              1          2             3        4
+string catBooks[] = {"Ciencia Ficcion", "Drama", "Ramantica", "Cuento", "Novela"};
+
+// lista de trofeos disponibles
+                        //0                             1
+string trofeos[] = {"Lector de Ciencia Ficcion", "Lector de Drama", 
+                        // 2                    3               4
+                "Lector de Ramantica", "Lector de Cuento", "Lector de Novela"};
+
+
 int main(){
     // leer datos de los libros disponibles
     ifstream fileBooks("./data/booksData.json");
@@ -37,6 +48,15 @@ int main(){
             booksData.at("li0001").at("Genero") << "\n" <<
             // mostrar solo el nombre del libro
             booksData.at("li0001").at("Nombre") << endl;
+
+    // imprimir una categoria de libros
+    cout << catBooks[0];
+
+    // guardar nuevamente los datos JSON
+    ofstream save_books("./data/booksData.json");
+    save_books << booksData.dump(1, '\t');
+    ofstream save_user("./data/userData.json");
+    save_user << userData.dump(1, '\t');
 
     //system("pause");
     return 0;
