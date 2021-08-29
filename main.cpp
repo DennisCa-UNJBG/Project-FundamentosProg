@@ -52,6 +52,20 @@ int main(){
     // imprimir una categoria de libros
     cout << catBooks[0];
 
+    /* crear un nuevo usuario y llenar sus datos */
+    userData["pr12345"]["booksRead"] = {"null"};
+    userData["pr12345"]["dni"] = 12345;
+    userData["pr12345"]["name"] = "Usuario prueba";
+    userData["pr12345"]["points"] = 0;
+    userData["pr12345"]["trophies"] = {"null"};
+    //cout << userData.dump(1, '\t') << "\n\n"<< endl; // mostrar nuevamente el JSON pero con el nuevo usuario
+
+    /* recorrer toda la variable JSON userData para obtener sus valores principales */
+    for (auto& x : userData.items())
+    {
+        std::cout << "key: " << x.key() << ", value: " << x.value() << '\n';
+    }
+
     // guardar nuevamente los datos JSON
     ofstream save_books("./data/booksData.json");
     save_books << booksData.dump(1, '\t');
