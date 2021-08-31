@@ -104,6 +104,7 @@ void option_menu(int val, json *booksData, json *userData, userTemp *newUserTemp
     {
         case 1:
             insert_user(booksData, userData, newUserTemp);
+            cout << "hola" ;
             break;
         case 2:
             show_users(userData);
