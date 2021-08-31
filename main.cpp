@@ -1,16 +1,29 @@
 #include <iostream>
+#include <string>
 #include "json.hpp" // ruta relativa, se movio la libreria fuera de su carpeta para un mejor uso
 #include <fstream> // leer y escribir en archivos
+#include <vector> // para usar las variables tipo VECTOR
 
 using json = nlohmann::json;
 using namespace std;
 
+// struct para crear un nuevos usuarios
+struct userTemp {
+    string codigo;
+    vector <string> booksRead;
+    int dni;
+    string name = "prueba";
+    int points;
+    vector <string> trophies;
+};
+
 int showMenu();
 void saveData(json *booksData, json *userData);
 void show_data(json *data);
-void option_menu(int val, json *booksData, json *userData);
+void option_menu(int val, json *booksData, json *userData, userTemp *newUserTemp);
 void show_ranking(json *booksData, json *userData);
 void show_users(json *userData);
+void insert_user(json *booksData, json *userData, userTemp *newUserTemp);
 
 
 // categoria de los libros -> 0           1          2             3        4
@@ -22,7 +35,10 @@ string trofeos[] = {"Lector de Ciencia Ficcion", "Lector de Drama", "Lector de R
 //variable para finalizar el bucle del programa
 bool start = true;
 
-int main(){
+int main(){   
+
+    userTemp newUserTemp;
+
     // leer datos de los libros disponibles
     ifstream fileBooks("./data/booksData.json");
 
@@ -37,7 +53,7 @@ int main(){
     {
         //show_data(&userData);
         int val_menu = showMenu();
-        option_menu(val_menu, &booksData, &userData);  
+        option_menu(val_menu, &booksData, &userData, &newUserTemp);  
     }
     
     //system("pause");
@@ -74,24 +90,26 @@ void saveData(json *booksData, json *userData)
 // mostrar datos sin procesar
 void show_data(json *data)
 {
+    for (auto it = data->begin(); it != data->end(); ++it)
+    {
+        std::cout << it.key() << " | " << it.value() << "\n";
+    }
     cout << data->dump(1, '\t') << "\n\n"<< endl;
 }
 
 // procesar las opciones del menu
-void option_menu(int val, json *booksData, json *userData)
+void option_menu(int val, json *booksData, json *userData, userTemp *newUserTemp)
 {   
     switch (val)
     {
         case 1:
-            system("cls");
-            cout << "\n\nEn proceso de desarrollo...\n\n" << endl;
+            insert_user(booksData, userData, newUserTemp);
             break;
         case 2:
             show_users(userData);
             break;
         case 3:
-            system("cls");
-            cout << "\n\nEn proceso de desarrollo...\n\n" << endl;
+            show_data(userData);
             break;
         case 4:
             show_ranking(booksData, userData);
@@ -102,7 +120,7 @@ void option_menu(int val, json *booksData, json *userData)
             break;
         default:
             system("cls");
-            cout << "Opcion no valida, intentelo nuevamente...\n\n" << endl;
+            cout << "\nOpcion no valida, intentelo nuevamente...\n\n" << endl;
             break;
     }
 }
@@ -139,4 +157,52 @@ void show_users(json *userData)
     }
     cout << "---------------------------------------------------------+" << endl;
     cout << "\nFin de la lista...\n";
+}
+
+void insert_user(json *booksData, json *userData, userTemp *newUserTemp)
+{
+    bool comprobar = false;
+    
+    system("cls");
+    cout << "---------------------------------------------------------+" << endl;
+    cout << "\tCreando un Nuevo Usuario" << endl;
+    cout << "---------------------------------------------------------+" << endl;
+
+    do {
+        comprobar = false;
+        
+        cout << "Ingrese el DNI del nuevo usuario: " << endl;
+        cin >> newUserTemp->dni;
+
+        for (auto it = userData->begin(); it != userData->end(); ++it) // o   for (auto& it : userData->items())
+        {
+            if(it.value().at("dni") == newUserTemp->dni)
+            {
+                cout << "No permitido!! el DNI ingresado ya se encuentra registrado" << endl;
+                comprobar = true;
+            }
+        }
+    }
+    while (comprobar);
+    
+    cout << "Ingrese el nombre del nuevo usuario: \n";
+    getline(cin, newUserTemp->name);
+    getline(cin, newUserTemp->name); //deben sere 2 getline(luego se repara)
+
+    cout << "El Usuario a leido libros registrados? (0 =  no, 1 = si) \n";
+    cin >> comprobar;
+
+    while(comprobar) 
+    {
+        string cod;
+        cout << "Ingrese el código de un libro: " << endl;
+        cin >> cod;
+        newUserTemp->booksRead.push_back(cod);
+        cout << "Ingresar nuevo libro = 1 , salie = 0: ";
+        cin >> comprobar;
+    }
+
+    cout << "\n" << newUserTemp->booksRead.size() << "\n" << newUserTemp->dni << "\n"  << newUserTemp->name
+        << "\n" << newUserTemp->points << "\n"  << newUserTemp->trophies.size() << "\n" << endl;
+        
 }
