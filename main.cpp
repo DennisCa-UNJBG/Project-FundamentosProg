@@ -3,6 +3,7 @@
 #include "json.hpp" // ruta relativa, se movio la libreria fuera de su carpeta para un mejor uso
 #include <fstream> // leer y escribir en archivos
 #include <vector> // para usar las variables tipo VECTOR
+#include <conio.h>
 
 using json = nlohmann::json;
 using namespace std;
@@ -63,16 +64,17 @@ int main(){
 // mostrar menu
 int showMenu()
 {
+    system("cls");
     int i = 0;
-    cout << "********************************" << endl;
-    cout << "\tMENU" << endl;
-    cout << "********************************" << endl;
-    cout << "[1] Ingresar nuevo Usuario " << endl;
-    cout << "[2] Visualizar lectores registrados " << endl;
-    cout << "[3] Modificar datos del lector " << endl;
-    cout << "[4] Imprimir el ranking de lectores " << endl;
-    cout << "[5] Salir " << endl;
-    cout << "Selecciones una opcion(numero): ";
+    cout << "\n =======================================" << endl;
+    cout << "\tM	E	N	U" << endl;
+    cout << " =======================================" << endl;
+    cout << "  [1] Ingresar nuevo Usuario " << endl;
+    cout << "  [2] Visualizar lectores registrados " << endl;
+    cout << "  [3] Modificar datos del lector " << endl;
+    cout << "  [4] Imprimir el ranking de lectores " << endl;
+    cout << "  [5] Salir " << endl;
+    cout << "  Selecciones una opcion(numero): ";
     cin >> i;
 
     return i;
@@ -103,13 +105,17 @@ void option_menu(int val, json *booksData, json *userData, userTemp *newUserTemp
     switch (val)
     {
         case 1:
+            system("cls");
             insert_user(booksData, userData, newUserTemp);
+            _getch();
             break;
         case 2:
             show_users(userData);
             break;
         case 3:
+            system("cls");
             show_data(userData);
+            _getch();
             break;
         case 4:
             show_ranking(booksData, userData);
@@ -129,17 +135,19 @@ void option_menu(int val, json *booksData, json *userData, userTemp *newUserTemp
 void show_ranking(json *booksData,json *userData)
 {
     system("cls");
-    cout << "----------------------------------------------------------------------------+" << endl;
-    cout << "|   Codigo   |\tDNI\t|\tNombres \t |   Puntos   |  Trofeo \t |  Nro Libros |" << endl;
-    cout << "----------------------------------------------------------------------------+" << endl;
+    cout << "\n\t\t\t\tRANKING DE LECTORES\n";
+    cout << "+-------------------------------------------------------------------------------+" << endl;
+    cout << "    Codigo    |    DNI   |\tNombres \t| Puntos |  Trofeo  | Nro Libros " << endl;
+    cout << "+-------------------------------------------------------------------------------+" << endl;
     for (auto& x : userData->items())
     {
-        cout << " " << x.key() << "\t" << x.value().at("dni") << "   " << x.value().at("name");
-        cout << "\t " << x.value().at("points") << " \t" << x.value().at("trophies").size();
-        cout << "\t" << x.value().at("booksRead").size() << endl;
+        cout << "  " << x.key() << "  | " << x.value().at("dni") << " |  " << x.value().at("name") << " \t";
+        cout << "|   " << x.value().at("points") << " \t |     " << x.value().at("trophies").size() << "    ";
+        cout << "|   " << x.value().at("booksRead").size() << endl;
     }
-    cout << "----------------------------------------------------------------------------+" << endl;
-    cout << "\nFin de la lista...\n";
+    cout << "+-------------------------------------------------------------------------------+" << endl;
+    cout << "\nPRESIONE UNA TECLA PARA VOLVER AL MENU\n";
+    _getch();
 }
 
 // mostrar todos los usuarios
@@ -147,16 +155,17 @@ void show_users(json *userData)
 {
     system("cls");
     cout << "\nActualmente existen " << userData->size() << " usuarios en el sistema\n" << endl;
-    cout << "---------------------------------------------------------+" << endl;
-    cout << "|   Codigo    |    DNI\t |\tNombre y Apellido \t| " << endl;
-    cout << "---------------------------------------------------------+" << endl;
+    cout << "+--------------------------------------------------------+" << endl;
+    cout << "    Codigo    |     DNI    |\tNombre y Apellido \t " << endl;
+    cout << "+--------------------------------------------------------+" << endl;
     for (auto& x : userData->items())
     {
-        cout << "  " << x.key() << " \t " << x.value().at("dni") << " \t ";
+        cout << "  " << x.key() << "  |  " << x.value().at("dni") << "  |  ";
         cout << x.value().at("name") << endl;
     }
-    cout << "---------------------------------------------------------+" << endl;
-    cout << "\nFin de la lista...\n";
+    cout << "+--------------------------------------------------------+" << endl;
+    cout << "\nPRESIONE UNA TECLA PARA VOLVER AL MENU\n";
+    _getch();
 }
 
 void insert_user(json *booksData, json *userData, userTemp *newUserTemp)
