@@ -6,6 +6,7 @@
 #include <conio.h>
 #include <cmath> //por el momento para hallar la longitud del dni (log10()+1)
 #include <windows.h> // funcion Sleep
+#include <algorithm> //invertir string, upper case y lower case (convertir a mayuscula y minuscula)
 
 using json = nlohmann::json;
 using namespace std;
@@ -108,6 +109,7 @@ void option_menu(int val, json *booksData, json *userData, userTemp *newUserTemp
     {
         case 1:
             insert_user(booksData, userData, newUserTemp);
+            cout << "\nPRESIONE UNA TECLA PARA VOLVER AL MENU\n";
             _getch();
             break;
         case 2:
@@ -213,14 +215,45 @@ void insert_user(json *booksData, json *userData, userTemp *newUserTemp)
     while(comprobar) 
     {
         string cod;
-        cout << "Ingrese el código de un libro: " << endl;
+        cout << "Ingrese el codigo de un libro: " << endl;
         cin >> cod;
         newUserTemp->booksRead.push_back(cod);
-        cout << "Ingresar nuevo libro = 1 , salie = 0: ";
+        cout << "Ingresar nuevo libro = 1 , salir = 0: ";
         cin >> comprobar;
     }
-
+    
+    // imprimir solo para observar el resultado - borrar luego
     cout << "\n" << newUserTemp->booksRead.size() << "\n" << newUserTemp->dni << "\n"  << newUserTemp->name
         << "\n" << newUserTemp->points << "\n"  << newUserTemp->trophies.size() << "\n" << endl;
+
+    //crear codigo del nuevo usuario usuario
+    string codUser = newUserTemp->name.substr(newUserTemp->name.find(" ")+1, 2);    
+    string tmp_s_reversed(to_string(newUserTemp->dni));
+    reverse(tmp_s_reversed.begin(), tmp_s_reversed.end());
+    codUser = codUser + tmp_s_reversed;
+
+    //convertir el codigo del usuario a minusculas
+    std::for_each(codUser.begin(), codUser.end(), [](char & c) {
+        c = ::tolower(c);
+    });
+    
+    // agregar nuevo usuario a una variable JSON
+    json prueba =
+    {
+        codUser, {
+                {"booksRead", {1,2,3,4}}, // falta procesar libros
+                {"dni", newUserTemp->dni},
+                {"name", newUserTemp->name},
+                {"points", 42}, // falta procesar puntos
+                {"trophies", {1,2,3,4}} // falta procesar trofeos
+            }
+    };
+
+    // agregar la variable JSON del usuario a la variable JSON principal
+    userData->push_back(json::object_t::value_type(prueba));
+    show_data(userData); // mostrar data solo para ver los cambios realizados
+    
+    // guardar cambios en los archivos de texto
+    saveData(booksData, userData);
         
 }
