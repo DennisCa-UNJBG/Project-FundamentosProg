@@ -4,6 +4,8 @@
 #include <fstream> // leer y escribir en archivos
 #include <vector> // para usar las variables tipo VECTOR
 #include <conio.h>
+#include <cmath> //por el momento para hallar la longitud del dni (log10()+1)
+#include <windows.h> // funcion Sleep
 
 using json = nlohmann::json;
 using namespace std;
@@ -105,7 +107,6 @@ void option_menu(int val, json *booksData, json *userData, userTemp *newUserTemp
     switch (val)
     {
         case 1:
-            system("cls");
             insert_user(booksData, userData, newUserTemp);
             _getch();
             break;
@@ -171,26 +172,34 @@ void show_users(json *userData)
 void insert_user(json *booksData, json *userData, userTemp *newUserTemp)
 {
     bool comprobar = false;
-    
-    system("cls");
-    cout << "---------------------------------------------------------+" << endl;
-    cout << "\tCreando un Nuevo Usuario" << endl;
-    cout << "---------------------------------------------------------+" << endl;
-
+   
     do {
         comprobar = false;
         
-        cout << "Ingrese el DNI del nuevo usuario: " << endl;
+        system("cls");
+        cout << "+---------------------------------------------------------+" << endl;
+        cout << "\tCreando un Nuevo Usuario" << endl;
+        cout << "+---------------------------------------------------------+" << endl;
+        
+        cout << "\nIngrese el DNI del nuevo usuario: " << endl;
         cin >> newUserTemp->dni;
-
-        for (auto it = userData->begin(); it != userData->end(); ++it) // o   for (auto& it : userData->items())
-        {
-            if(it.value().at("dni") == newUserTemp->dni)
-            {
-                cout << "No permitido!! el DNI ingresado ya se encuentra registrado" << endl;
-                comprobar = true;
-            }
-        }
+        
+        if ( int( log10(newUserTemp->dni) + 1 ) == 8 ){  //comprobar que sea DNI valido
+			for (auto it = userData->begin(); it != userData->end(); ++it) // o   for (auto& it : userData->items())
+        	{
+            	if(it.value().at("dni") == newUserTemp->dni)
+           		{
+            		cout << "No permitido!! el DNI ingresado ya se encuentra registrado" << endl;
+            		Sleep(3000); //esperar 3 segundos
+            		comprobar = true;
+            	}
+        	}
+		}
+		else{
+			cout << "DNI no valido" << endl;
+			Sleep(800); //esperar 0.8 segundos
+			comprobar = true;
+		}
     }
     while (comprobar);
     
