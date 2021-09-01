@@ -6,7 +6,7 @@
 #include <conio.h>
 #include <cmath> //por el momento para hallar la longitud del dni (log10()+1)
 #include <windows.h> // funcion Sleep
-#include <algorithm> //invertir string, upper case y lower case (convertir a mayuscula y minuscula)
+#include <algorithm> //invertir string, upper case y lower case (convertir a mayuscula y minuscula); sort->ordenamiento
 
 using json = nlohmann::json;
 using namespace std;
@@ -21,11 +21,19 @@ struct userTemp {
     vector <string> trophies;
 };
 
+//struct para mostrar el ranking de usuarios
+typedef struct user_data
+{
+    string codigo, name;
+    int dni, booksRead, points,trophies;
+}datatemp;
+
 int showMenu();
 void saveData(json *booksData, json *userData);
 void show_data(json *data);
 void option_menu(int val, json *booksData, json *userData, userTemp *newUserTemp);
 void show_ranking(json *booksData, json *userData);
+bool compare(datatemp a, datatemp b); // funcion para ordenar el ranking de usuarios
 void show_users(json *userData);
 void insert_user(json *booksData, json *userData, userTemp *newUserTemp);
 
@@ -138,19 +146,48 @@ void option_menu(int val, json *booksData, json *userData, userTemp *newUserTemp
 void show_ranking(json *booksData,json *userData)
 {
     system("cls");
+
+    int cantData = userData->size();
+    datatemp arrayUser[cantData];
+
+    int ii = 0;
+    for (auto x = userData->begin(); x != userData->end(); ++x)
+    {
+        arrayUser[ii].codigo = x.key();
+        arrayUser[ii].dni = x.value().at("dni");
+        arrayUser[ii].name = x.value().at("name");
+        arrayUser[ii].points = x.value().at("points");
+        arrayUser[ii].trophies = x.value().at("trophies").size();
+        arrayUser[ii].booksRead = x.value().at("booksRead").size();
+        ii++;
+    }
+
+    sort(arrayUser, arrayUser+cantData, compare);
+
     cout << "\n\t\t\t\tRANKING DE LECTORES\n";
     cout << "+-------------------------------------------------------------------------------+" << endl;
     cout << "    Codigo    |    DNI   |\tNombres \t| Puntos |  Trofeo  | Nro Libros " << endl;
     cout << "+-------------------------------------------------------------------------------+" << endl;
-    for (auto& x : userData->items())
+    for( int i = 0 ; i < cantData ; i++)
     {
-        cout << "  " << x.key() << "  | " << x.value().at("dni") << " |  " << x.value().at("name") << " \t";
-        cout << "|   " << x.value().at("points") << " \t |     " << x.value().at("trophies").size() << "    ";
-        cout << "|   " << x.value().at("booksRead").size() << endl;
+        cout << "  " << arrayUser[i].codigo << "  | " << arrayUser[i].dni << " |  " << arrayUser[i].name << "   \t";
+        cout << "|   " << arrayUser[i].points << "  |  " << arrayUser[i].trophies << "    ";
+        cout << " |   " << arrayUser[i].booksRead << endl;
+
+        if (i == 2) // mostrar solo una cantidad de usuarios
+            break;
     }
     cout << "+-------------------------------------------------------------------------------+" << endl;
     cout << "\nPRESIONE UNA TECLA PARA VOLVER AL MENU\n";
     _getch();
+}
+
+bool compare(datatemp a, datatemp b) // funcion para ordenar el ranking de usuarios
+{
+	if(a.points > b.points)
+		return 1;
+	else 
+		return 0;
 }
 
 // mostrar todos los usuarios
