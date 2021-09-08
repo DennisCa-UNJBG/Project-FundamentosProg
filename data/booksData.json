@@ -3,7 +3,7 @@
 		"Genero": 1,
 		"Nombre": "Ciencia Ficcion-1",
 		"NroPag": 75,
-		"points": 0
+		"points": 1
 	},
 	"li0002": {
 		"Genero": 2,
@@ -15,13 +15,13 @@
 		"Genero": 3,
 		"Nombre": "Romantica-1",
 		"NroPag": 150,
-		"points": 1
+		"points": 2
 	},
 	"li0004": {
 		"Genero": 4,
 		"Nombre": "Cuento-1",
 		"NroPag": 50,
-		"points": 0
+		"points": 1
 	},
 	"li0005": {
 		"Genero": 5,
@@ -30,45 +30,159 @@
 		"points": 5
 	},
 	"li0006": {
-		"Genero": 5,
+		"Genero": 1,
 		"Nombre": "Ciencia Ficcion-2",
 		"NroPag": 180,
-		"points": 1
+		"points": 2
 	},
 	"li0007": {
-		"Genero": 5,
+		"Genero": 1,
 		"Nombre": "Ciencia Ficcion-3",
 		"NroPag": 320,
-		"points": 3
+		"points": 4
 	},
 	"li0008": {
-		"Genero": 5,
+		"Genero": 1,
 		"Nombre": "Ciencia Ficcion-4",
 		"NroPag": 600,
 		"points": 6
 	},
 	"li0009": {
-		"Genero": 2,
-		"Nombre": "Drama-2",
-		"NroPag": 150,
-		"points": 1
+		"Genero": 1,
+		"Nombre": "Ciencia Ficcion-5",
+		"NroPag": 289,
+		"points": 3
 	},
 	"li0010": {
 		"Genero": 2,
-		"Nombre": "Drama-3",
-		"NroPag": 160,
-		"points": 1
+		"Nombre": "Drama-2",
+		"NroPag": 150,
+		"points": 2
 	},
 	"li0011": {
 		"Genero": 2,
-		"Nombre": "Drama-4",
-		"NroPag": 120,
-		"points": 1
+		"Nombre": "Drama-3",
+		"NroPag": 160,
+		"points": 2
 	},
 	"li0012": {
 		"Genero": 2,
+		"Nombre": "Drama-4",
+		"NroPag": 120,
+		"points": 2
+	},
+	"li0013": {
+		"Genero": 2,
 		"Nombre": "Drama-5",
 		"NroPag": 187,
+		"points": 2
+	},
+	"li0014": {
+		"Genero": 4,
+		"Nombre": "Cuento-2",
+		"NroPag": 160,
+		"points": 2
+	},
+	"li0015": {
+		"Genero": 4,
+		"Nombre": "Cuento-3",
+		"NroPag": 154,
+		"points": 2
+	},
+	"li0016": {
+		"Genero": 4,
+		"Nombre": "Cuento-4",
+		"NroPag": 852,
+		"points": 9
+	},
+	"li0017": {
+		"Genero": 4,
+		"Nombre": "Cuento-5",
+		"NroPag": 412,
+		"points": 5
+	},
+	"li0018": {
+		"Genero": 4,
+		"Nombre": "Cuento-6",
+		"NroPag": 654,
+		"points": 7
+	},
+	"li0019": {
+		"Genero": 4,
+		"Nombre": "Cuento-7",
+		"NroPag": 120,
 		"points": 1
+	},
+	"li0020": {
+		"Genero": 5,
+		"Nombre": "Novela-2",
+		"NroPag": 189,
+		"points": 2
+	},
+	"li0021": {
+		"Genero": 5,
+		"Nombre": "Novela-3",
+		"NroPag": 150,
+		"points": 2
+	},
+	"li0022": {
+		"Genero": 5,
+		"Nombre": "Novela-4",
+		"NroPag": 178,
+		"points": 2
+	},
+	"li0023": {
+		"Genero": 5,
+		"Nombre": "Novela-5",
+		"NroPag": 523,
+		"points": 6
+	},
+	"li0024": {
+		"Genero": 5,
+		"Nombre": "Novela-6",
+		"NroPag": 478,
+		"points": 5
+	},
+	"li0025": {
+		"Genero": 5,
+		"Nombre": "Novela-7",
+		"NroPag": 987,
+		"points": 10
+	},
+	"li0026": {
+		"Genero": 3,
+		"Nombre": "Romantica-2",
+		"NroPag": 78,
+		"points": 1
+	},
+	"li0027": {
+		"Genero": 3,
+		"Nombre": "Romantica-3",
+		"NroPag": 156,
+		"points": 2
+	},
+	"li0028": {
+		"Genero": 3,
+		"Nombre": "Romantica-4",
+		"NroPag": 230,
+		"points": 3
+	},
+	"li0029": {
+		"Genero": 3,
+		"Nombre": "Romantica-5",
+		"NroPag": 145,
+		"points": 2
+	},
+	"li0030": {
+		"Genero": 3,
+		"Nombre": "Romantica-6",
+		"NroPag": 189,
+		"points": 2
+	},
+	"li0031": {
+		"Genero": 3,
+		"Nombre": "Romantica-7",
+		"NroPag": 452,
+		"points": 5
 	}
 }
