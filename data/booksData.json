@@ -2,26 +2,73 @@
 	"li0001": {
 		"Genero": 1,
 		"Nombre": "Ciencia Ficcion-1",
-		"NroPag": 75
+		"NroPag": 75,
+		"points": 0
 	},
 	"li0002": {
 		"Genero": 2,
 		"Nombre": "Drama-1",
-		"NroPag": 75
+		"NroPag": 100,
+		"points": 1
 	},
 	"li0003": {
 		"Genero": 3,
 		"Nombre": "Romantica-1",
-		"NroPag": 75
+		"NroPag": 150,
+		"points": 1
 	},
 	"li0004": {
 		"Genero": 4,
 		"Nombre": "Cuento-1",
-		"NroPag": 75
+		"NroPag": 50,
+		"points": 0
 	},
 	"li0005": {
 		"Genero": 5,
 		"Nombre": "Novela-1",
-		"NroPag": 75
+		"NroPag": 500,
+		"points": 5
+	},
+	"li0006": {
+		"Genero": 5,
+		"Nombre": "Ciencia Ficcion-2",
+		"NroPag": 180,
+		"points": 1
+	},
+	"li0007": {
+		"Genero": 5,
+		"Nombre": "Ciencia Ficcion-3",
+		"NroPag": 320,
+		"points": 3
+	},
+	"li0008": {
+		"Genero": 5,
+		"Nombre": "Ciencia Ficcion-4",
+		"NroPag": 600,
+		"points": 6
+	},
+	"li0009": {
+		"Genero": 2,
+		"Nombre": "Drama-2",
+		"NroPag": 150,
+		"points": 1
+	},
+	"li0010": {
+		"Genero": 2,
+		"Nombre": "Drama-3",
+		"NroPag": 160,
+		"points": 1
+	},
+	"li0011": {
+		"Genero": 2,
+		"Nombre": "Drama-4",
+		"NroPag": 120,
+		"points": 1
+	},
+	"li0012": {
+		"Genero": 2,
+		"Nombre": "Drama-5",
+		"NroPag": 187,
+		"points": 1
 	}
 }

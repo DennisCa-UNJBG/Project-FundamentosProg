@@ -17,7 +17,7 @@ struct userTemp {
     vector <string> booksRead;
     int dni;
     string name = "prueba";
-    int points;
+    int points = 0;
     vector <string> trophies;
 };
 
@@ -30,7 +30,6 @@ typedef struct user_data
 
 int showMenu();
 void saveData(json *booksData, json *userData);
-void show_data(json *data);
 void option_menu(int val, json *booksData, json *userData, userTemp *newUserTemp);
 void show_ranking(json *booksData, json *userData);
 bool compare(datatemp a, datatemp b); // funcion para ordenar el ranking de usuarios
@@ -100,16 +99,6 @@ void saveData(json *booksData, json *userData)
     save_user << userData->dump(1, '\t');
 }
 
-// mostrar datos sin procesar
-void show_data(json *data)
-{
-    for (auto it = data->begin(); it != data->end(); ++it)
-    {
-        std::cout << it.key() << " | " << it.value() << "\n";
-    }
-    cout << data->dump(1, '\t') << "\n\n"<< endl;
-}
-
 // procesar las opciones del menu
 void option_menu(int val, json *booksData, json *userData, userTemp *newUserTemp)
 {   
@@ -125,7 +114,7 @@ void option_menu(int val, json *booksData, json *userData, userTemp *newUserTemp
             break;
         case 3:
             system("cls");
-            show_data(userData);
+            cout << "\nEn proceso de desarrollo" << endl;
             _getch();
             break;
         case 4:
@@ -252,16 +241,12 @@ void insert_user(json *booksData, json *userData, userTemp *newUserTemp)
     while(comprobar) 
     {
         string cod;
-        cout << "Ingrese el codigo de un libro: " << endl;
+        cout << "Ingrese el codigo de un libro: " << endl; // solo funciona con códigos registrados
         cin >> cod;
         newUserTemp->booksRead.push_back(cod);
         cout << "Ingresar nuevo libro = 1 , salir = 0: ";
         cin >> comprobar;
     }
-    
-    // imprimir solo para observar el resultado - borrar luego
-    cout << "\n" << newUserTemp->booksRead.size() << "\n" << newUserTemp->dni << "\n"  << newUserTemp->name
-        << "\n" << newUserTemp->points << "\n"  << newUserTemp->trophies.size() << "\n" << endl;
 
     //crear codigo del nuevo usuario usuario
     string codUser = newUserTemp->name.substr(newUserTemp->name.find(" ")+1, 2);    
@@ -273,24 +258,48 @@ void insert_user(json *booksData, json *userData, userTemp *newUserTemp)
     std::for_each(codUser.begin(), codUser.end(), [](char & c) {
         c = ::tolower(c);
     });
-    
+
+    // calcular cantidad de puntos
+    for (auto i = 0; i < newUserTemp->booksRead.size(); i++) 
+    {
+        for (auto x = booksData->begin(); x != booksData->end(); ++x)
+        {
+            if(x.key() == newUserTemp->booksRead[i]) // buscar si el libro existe
+            {
+                newUserTemp->points += 1; // si existe se le suma 1 punto
+                int num_temp = x.value().at("points"); // se obtiene la cantidad de puntos de ese libro
+                newUserTemp->points += num_temp; // se suma los puntos anteriores con los nuevos
+            }
+        }        
+    }
+
+    json j_vec(newUserTemp->booksRead); // convertir vector de libros a json_array
+
     // agregar nuevo usuario a una variable JSON
     json prueba =
     {
         codUser, {
-                {"booksRead", {1,2,3,4}}, // falta procesar libros
+                {"booksRead", j_vec},
                 {"dni", newUserTemp->dni},
                 {"name", newUserTemp->name},
-                {"points", 42}, // falta procesar puntos
+                {"points", newUserTemp->points},
                 {"trophies", {1,2,3,4}} // falta procesar trofeos
             }
     };
-
-    // agregar la variable JSON del usuario a la variable JSON principal
-    userData->push_back(json::object_t::value_type(prueba));
-    show_data(userData); // mostrar data solo para ver los cambios realizados
     
+    // agregar la variable JSON del usuario a la variable JSON principal
+    userData->push_back(json::object_t::value_type(prueba));    
     // guardar cambios en los archivos de texto
     saveData(booksData, userData);
-        
+    
+    // imprimir para observar el resultado
+    system("cls");
+    cout << "+---------------------------------------------------------+" <<
+        "\nEl codigo del nuevo usuario es " << codUser << "\ny sus datos son:" <<
+        "+---------------------------------------------------------+" <<
+        "\n\tNombre: " << newUserTemp->name <<
+        "\n\tDNI:" << newUserTemp->dni <<
+        "\n\tCantidad de libros leidos: " << newUserTemp->booksRead.size() <<
+        "\n\tTotal de puntos: " << newUserTemp->points << 
+        "+---------------------------------------------------------+" << endl;
 }
