@@ -19,6 +19,11 @@ struct userTemp {
     string name = "prueba";
     int points = 0;
     vector <string> trophies;
+    
+    void reset(){
+        codigo = ""; booksRead = {}; dni = 0;
+        name = "prueba"; points =0; trophies = {};
+    }
 };
 
 //struct para mostrar el ranking de usuarios
@@ -62,9 +67,8 @@ int main(){
     
     while(start)
     {
-        //show_data(&userData);
         int val_menu = showMenu();
-        option_menu(val_menu, &booksData, &userData, &newUserTemp);  
+        option_menu(val_menu, &booksData, &userData, &newUserTemp);
     }
     
     //system("pause");
@@ -163,7 +167,7 @@ void show_ranking(json *booksData,json *userData)
         cout << "|   " << arrayUser[i].points << "  |  " << arrayUser[i].trophies << "    ";
         cout << " |   " << arrayUser[i].booksRead << endl;
 
-        if (i == 2) // mostrar solo una cantidad de usuarios
+        if (i == 9) // mostrar solo el top 10
             break;
     }
     cout << "+-------------------------------------------------------------------------------+" << endl;
@@ -296,10 +300,12 @@ void insert_user(json *booksData, json *userData, userTemp *newUserTemp)
     system("cls");
     cout << "+---------------------------------------------------------+" <<
         "\nEl codigo del nuevo usuario es " << codUser << "\ny sus datos son:" <<
-        "+---------------------------------------------------------+" <<
+        "\n+---------------------------------------------------------+\n" <<
         "\n\tNombre: " << newUserTemp->name <<
         "\n\tDNI:" << newUserTemp->dni <<
         "\n\tCantidad de libros leidos: " << newUserTemp->booksRead.size() <<
         "\n\tTotal de puntos: " << newUserTemp->points << 
-        "+---------------------------------------------------------+" << endl;
+        "\n+---------------------------------------------------------+" << endl;
+    
+    newUserTemp->reset(); // reiniciar datos del struct temporal
 }
