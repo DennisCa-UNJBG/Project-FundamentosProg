@@ -18,7 +18,7 @@ struct userTemp {
     int dni;
     string name = "prueba";
     int points = 0;
-    vector <string> trophies;
+    vector <int> trophies;
     
     void reset(){
         codigo = ""; booksRead = {}; dni = 0;
@@ -40,6 +40,7 @@ void show_ranking(json *booksData, json *userData);
 bool compare(datatemp a, datatemp b); // funcion para ordenar el ranking de usuarios
 void show_users(json *userData);
 void insert_user(json *booksData, json *userData, userTemp *newUserTemp);
+vector <int> processTrophies(json *booksData, vector <string> name);
 
 
 // categoria de los libros -> 0           1          2             3        4
@@ -229,15 +230,15 @@ void insert_user(json *booksData, json *userData, userTemp *newUserTemp)
 		}
 		else{
 			cout << "DNI no valido" << endl;
-			Sleep(800); //esperar 0.8 segundos
+			Sleep(2000); //esperar 2 segundos
 			comprobar = true;
 		}
     }
     while (comprobar);
     
     cout << "Ingrese el nombre del nuevo usuario: \n";
-    getline(cin, newUserTemp->name);
-    getline(cin, newUserTemp->name); //deben sere 2 getline(luego se repara)
+    cin.sync(); // sincronizar entrada de consola 
+    getline(cin, newUserTemp->name); //ingresar nombre completo a variable
 
     cout << "El Usuario a leido libros registrados? (0 =  no, 1 = si) \n";
     cin >> comprobar;
@@ -277,17 +278,21 @@ void insert_user(json *booksData, json *userData, userTemp *newUserTemp)
         }        
     }
 
-    json j_vec(newUserTemp->booksRead); // convertir vector de libros a json_array
+    json j_books(newUserTemp->booksRead); // convertir vector de libros a json_array
+
+    // calcular cantidad de trofeos
+    newUserTemp->trophies = processTrophies(booksData, newUserTemp->booksRead);
+    json j_trophies(newUserTemp->trophies); // convertir vector de trofeos a json_array
 
     // agregar nuevo usuario a una variable JSON
     json prueba =
     {
         codUser, {
-                {"booksRead", j_vec},
+                {"booksRead", j_books},
                 {"dni", newUserTemp->dni},
                 {"name", newUserTemp->name},
                 {"points", newUserTemp->points},
-                {"trophies", {1,2,3,4}} // falta procesar trofeos
+                {"trophies", j_trophies}
             }
     };
     
@@ -308,4 +313,33 @@ void insert_user(json *booksData, json *userData, userTemp *newUserTemp)
         "\n+---------------------------------------------------------+" << endl;
     
     newUserTemp->reset(); // reiniciar datos del struct temporal
+}
+
+vector <int> processTrophies(json *booksData, vector <string> booksread)
+{
+    vector <int> Trophies; // para almacenar los id de los trofeos obtenidos cada vez
+    int number[] = {0,0,0,0,0}; // almacenar la cantidad de libros leidos por categoria
+
+    for (auto i = 0; i < booksread.size(); i++) // recorrer libros
+    {        
+        for (auto x = booksData->begin(); x != booksData->end(); ++x) // buscar si el libro existe
+        {
+            if(x.key() == booksread[i]) // comprar ID del libro con los libros almacenados
+            {
+                for (int j = 0; j < 5; j++) // recorrer el array contador "number"
+                {
+                    if (j == x.value().at("Genero")) // comparar el id del genero
+                        number[j] += 1; // incrementar el valor por cada libro leido del mismo genero
+                }                
+            }
+        }
+    }
+
+    // verificar si un usuaria a leido 5 o mas libros de una categoria
+    for (int j = 0; j < 5; j++) 
+    {
+        if (number[j] >= 5) // si leyo mas de 5 libros del mismo genero agregar su ID
+            Trophies.push_back(j);// mandar el id del trofeo para mostrar
+    } 
+    return Trophies; // regresar los trofeos obtenidos
 }
