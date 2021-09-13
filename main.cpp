@@ -41,6 +41,7 @@ bool compare(datatemp a, datatemp b); // funcion para ordenar el ranking de usua
 void show_users(json *userData);
 void insert_user(json *booksData, json *userData, userTemp *newUserTemp);
 vector <int> processTrophies(json *booksData, vector <string> name);
+void update_user(json *booksData, json *userData, userTemp *newUserTemp);
 
 
 // categoria de los libros -> 0           1          2             3        4
@@ -119,7 +120,8 @@ void option_menu(int val, json *booksData, json *userData, userTemp *newUserTemp
             break;
         case 3:
             system("cls");
-            cout << "\nEn proceso de desarrollo" << endl;
+            update_user(booksData, userData, newUserTemp);
+            cout << "\nPRESIONE UNA TECLA PARA VOLVER AL MENU\n";
             _getch();
             break;
         case 4:
@@ -342,4 +344,99 @@ vector <int> processTrophies(json *booksData, vector <string> booksread)
             Trophies.push_back(j);// mandar el id del trofeo para mostrar
     } 
     return Trophies; // regresar los trofeos obtenidos
+}
+void update_user(json *booksData, json *userData, userTemp *newUserTemp)
+{
+    bool comprobar = false;
+   
+    do {
+        comprobar = false;
+        system("cls");
+        cout << "+---------------------------------------------------------+" << endl;
+        cout << "\tActualizando Usuario" << endl;
+        cout << "+---------------------------------------------------------+" << endl;
+        
+        cout << "\nIngrese el DNI del usuario: " << endl;
+        cin >> newUserTemp->dni;
+
+        for (auto it = userData->begin(); it != userData->end(); ++it) // o   for (auto& it : userData->items())
+        {
+            if(it.value().at("dni") == newUserTemp->dni)
+            {
+                cout << "Usuario encontrado!!" << endl;
+                newUserTemp->codigo = it.key();
+                newUserTemp->dni = it.value().at("dni");
+                newUserTemp->name = it.value().at("name");
+                
+                for (auto& x : it.value().at("booksRead").items())
+                {
+                    newUserTemp->booksRead.push_back(x.value());
+                }
+
+                comprobar = false;
+                break;
+            }
+            else{
+			cout << "DNI no valido, intentelo nuevamente" << endl;
+			Sleep(2000); //esperar 2 segundos
+			comprobar = true;
+		    }
+        }
+    }
+    while (comprobar);
+
+    cout << "El Usuario a leido nuevos libros? (0 =  no, 1 = si) \n";
+    cin >> comprobar;
+
+    if (comprobar)
+    {
+        while(comprobar) 
+        {
+            string cod;
+            cout << "Ingrese el codigo de un libro: " << endl; // solo funciona con códigos registrados
+            cin >> cod;
+            newUserTemp->booksRead.push_back(cod);
+            cout << "Ingresar nuevo libro = 1 , salir = 0: ";
+            cin >> comprobar;
+        }
+
+        // calcular cantidad de puntos
+        for (auto i = 0; i < newUserTemp->booksRead.size(); i++) 
+        {
+            for (auto x = booksData->begin(); x != booksData->end(); ++x)
+            {
+                if(x.key() == newUserTemp->booksRead[i]) // buscar si el libro existe
+                {
+                    newUserTemp->points += 1; // si existe se le suma 1 punto
+                    int num_temp = x.value().at("points"); // se obtiene la cantidad de puntos de ese libro
+                    newUserTemp->points += num_temp; // se suma los puntos anteriores con los nuevos
+                }
+            }        
+        }
+        json j_books(newUserTemp->booksRead); // convertir vector de libros a json_array
+
+        // calcular cantidad de trofeos
+        newUserTemp->trophies = processTrophies(booksData, newUserTemp->booksRead);
+        json j_trophies(newUserTemp->trophies); // convertir vector de trofeos a json_array
+
+        // agregar nuevo usuario a una variable JSON
+        json prueba =
+        {
+            newUserTemp->codigo, {
+                    {"booksRead", j_books},
+                    {"dni", newUserTemp->dni},
+                    {"name", newUserTemp->name},
+                    {"points", newUserTemp->points},
+                    {"trophies", j_trophies}
+                }
+        };
+        
+        // eliminar usuario para reemplazar sus datos
+        userData->erase(newUserTemp->codigo);
+        // agregar la variable JSON del usuario editado a la variable JSON principal
+        userData->push_back(json::object_t::value_type(prueba));    
+        // guardar cambios en los archivos de texto
+        saveData(booksData, userData);
+    }
+    newUserTemp->reset(); // reiniciar datos del struct temporal
 }
