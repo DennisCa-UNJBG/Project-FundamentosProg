@@ -47,7 +47,7 @@ vector <int> processTrophies(json *booksData, vector <string> name);
 string catBooks[] = {"Ciencia Ficcion", "Drama", "Ramantica", "Cuento", "Novela"};
 
 // lista de trofeos disponibles -> 0                1                   2                    3                  4
-string trofeos[] = {"Lector de Ciencia Ficcion", "Lector de Drama", "Lector de Ramantica", "Lector de Cuento", "Lector de Novela"};
+string trofeos[] = {"Lector de Ciencia Ficcion", "Lector de Dramas", "Lector de Romances", "Lector de Cuentos", "Lector de Novelas"};
 
 //variable para finalizar el bucle del programa
 bool start = true;

@@ -11,8 +11,22 @@
 		"name": "Luis Corzo",
 		"points": 14,
 		"trophies": [
-			null
+			1
 		]
+	},
+	"es14497865": {
+		"booksRead": [
+			"li0004",
+			"li0005",
+			"li0014",
+			"li0015",
+			"li0020",
+			"li0021"
+		],
+		"dni": 56879441,
+		"name": "Ruben Escobar",
+		"points": 20,
+		"trophies": []
 	},
 	"es21546958": {
 		"booksRead": [
@@ -29,8 +43,35 @@
 		"name": "Cinthia Espejo",
 		"points": 41,
 		"trophies": [
-			null
+			3
 		]
+	},
+	"fe97584653": {
+		"booksRead": [
+			"li0001",
+			"li0002",
+			"li0003",
+			"li0004",
+			"li0005"
+		],
+		"dni": 35648579,
+		"name": "Miguel Fernandez",
+		"points": 15,
+		"trophies": []
+	},
+	"gu62415798": {
+		"booksRead": [
+			"li0003",
+			"li0001",
+			"li0006",
+			"li0007",
+			"li0026",
+			"li0027"
+		],
+		"dni": 89751426,
+		"name": "Mariana Gutierrez",
+		"points": 18,
+		"trophies": []
 	},
 	"it54816518": {
 		"booksRead": [
@@ -46,72 +87,7 @@
 		"name": "Rufina Iturriaga",
 		"points": 24,
 		"trophies": [
-			null
-		]
-	},
-	"pe73609514": {
-		"booksRead": [
-			"li0001",
-			"li0006",
-			"li0007",
-			"li0008",
-			"li0009"
-		],
-		"dni": 41590637,
-		"name": "Juan Pena",
-		"points": 21,
-		"trophies": [
-			null
-		]
-	},
-	"va78326054": {
-		"booksRead": [
-			"li0005",
-			"li0020",
-			"li0021",
-			"li0022",
-			"li0023",
-			"li0024",
-			"li0025"
-		],
-		"dni": 45062387,
-		"name": "Manuel Vargas",
-		"points": 39,
-		"trophies": [
-			null
-		]
-	},
-	"pa23698754": {
-		"booksRead": [
-			"li0001",
-			"li0002",
-			"li0006",
-			"li0007",
-			"li0010",
-			"li0011",
-			"li0012"
-		],
-		"dni": 45789632,
-		"name": "Juana Paredes",
-		"points": 21,
-		"trophies": [
-			null
-		]
-	},
-	"es14497865": {
-		"booksRead": [
-			"li0004",
-			"li0005",
-			"li0014",
-			"li0015",
-			"li0020",
-			"li0021"
-		],
-		"dni": 56879441,
-		"name": "Ruben Escobar",
-		"points": 20,
-		"trophies": [
-			null
+			2
 		]
 	},
 	"oc35692154": {
@@ -127,23 +103,37 @@
 		"name": "Francisco Ochoa",
 		"points": 16,
 		"trophies": [
-			null
+			1
 		]
 	},
-	"gu62415798": {
+	"pa23698754": {
 		"booksRead": [
-			"li0003",
+			"li0001",
+			"li0002",
+			"li0006",
+			"li0007",
+			"li0010",
+			"li0011",
+			"li0012"
+		],
+		"dni": 45789632,
+		"name": "Juana Paredes",
+		"points": 21,
+		"trophies": []
+	},
+	"pe73609514": {
+		"booksRead": [
 			"li0001",
 			"li0006",
 			"li0007",
-			"li0026",
-			"li0027"
+			"li0008",
+			"li0009"
 		],
-		"dni": 89751426,
-		"name": "Mariana Gutierrez",
-		"points": 18,
+		"dni": 41590637,
+		"name": "Juan Pena",
+		"points": 21,
 		"trophies": [
-			null
+			0
 		]
 	},
 	"sa64215847": {
@@ -159,23 +149,23 @@
 		"dni": 74851246,
 		"name": "Isaias Saravia",
 		"points": 21,
-		"trophies": [
-			null
-		]
+		"trophies": []
 	},
-	"fe97584653": {
+	"va78326054": {
 		"booksRead": [
-			"li0001",
-			"li0002",
-			"li0003",
-			"li0004",
-			"li0005"
+			"li0005",
+			"li0020",
+			"li0021",
+			"li0022",
+			"li0023",
+			"li0024",
+			"li0025"
 		],
-		"dni": 35648579,
-		"name": "Miguel Fernandez",
-		"points": 15,
+		"dni": 45062387,
+		"name": "Manuel Vargas",
+		"points": 39,
 		"trophies": [
-			null
+			4
 		]
 	}
 }
