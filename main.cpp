@@ -132,8 +132,8 @@ void option_menu(int val, json *booksData, json *userData, userTemp *newUserTemp
             start = false;
             break;
         default:
-            system("cls");
             cout << "\nOpcion no valida, intentelo nuevamente...\n\n" << endl;
+	    Sleep(2000);
             break;
     }
 }
