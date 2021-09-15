@@ -347,16 +347,16 @@ vector <int> processTrophies(json *booksData, vector <string> booksread)
 }
 void update_user(json *booksData, json *userData, userTemp *newUserTemp)
 {
-    bool comprobar = false;
+    bool comprobar = true;
    
     do {
-        comprobar = false;
         system("cls");
         cout << "+---------------------------------------------------------+" << endl;
         cout << "\tActualizando Usuario" << endl;
         cout << "+---------------------------------------------------------+" << endl;
         
         cout << "\nIngrese el DNI del usuario: " << endl;
+        cin.sync();
         cin >> newUserTemp->dni;
 
         for (auto it = userData->begin(); it != userData->end(); ++it) // o   for (auto& it : userData->items())
@@ -376,12 +376,12 @@ void update_user(json *booksData, json *userData, userTemp *newUserTemp)
                 comprobar = false;
                 break;
             }
-            else{
+        }
+        if(comprobar){
 			cout << "DNI no valido, intentelo nuevamente" << endl;
 			Sleep(2000); //esperar 2 segundos
-			comprobar = true;
-		    }
-        }
+            newUserTemp->reset();
+		}
     }
     while (comprobar);
 
